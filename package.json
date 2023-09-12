@@ -1,7 +1,12 @@
 {
-  "name": "my-qwik-library-name",
+  "name": "kazekit",
   "version": "0.0.1",
-  "description": "Create a reusable Qwik component library",
+  "description": "KazeKit is a components library for Qwik.",
+  "keywords": [
+    "qwik",
+    "qwik ui components",
+    "components library"
+  ],
   "main": "./lib/index.qwik.mjs",
   "qwik": "./lib/index.qwik.mjs",
   "types": "./lib-types/index.d.ts",
