@@ -1,10 +1,11 @@
-import { Meta, Story } from '@storybook/html';
+import type { StoryObj } from '@storybook/react';
 import { Button, ButtonProps } from './button';
 import { $ } from '@builder.io/qwik';
 import { LuRocket } from '@qwikest/icons/lucide';
 
-export default {
+const meta = {
   title: 'Button',
+  component: Button,
   tags: ['autodocs'],
   argTypes: {
     onClick$: {
@@ -12,75 +13,73 @@ export default {
       description: 'The function called on click.'
     },
     text: { 
-      defaultValue: '',
+      defaultValue: 'Click me!',
       control: "text",
       description: 'The text of the button.'
     },
     variant: { 
-      defaultValue: '',
+      defaultValue: 'primary',
       control: "select",
       options: ['primary', 'secondary', 'success', 'danger', 'warning'],
       description: 'The variation of the button.'
     }
   },
-} as Meta<ButtonProps>;
+};
+export default meta;
+type Story = StoryObj<typeof Button>;
 
 const onClick$ = $(() => console.log('Button clicked!'));
 
-const Template = (args: ButtonProps) => 
-  <Button onClick$={ args.onClick$ }
-          text={ args.text }
-          variant={ args.variant }>
-  </Button>;
+export const Default: Story = { 
+  args: {
+    onClick$: onClick$,
+    text: 'Primary',
+    variant: 'primary'
+  } as ButtonProps,
+}
+  
+export const Primary = {
+  name: 'Primary',
+  render: () => <Button onClick$={onClick$}
+                        text='Primary'
+                        variant='primary' />,
+};
 
-const TemplateWithIcon = (args: ButtonProps) => 
-  <Button onClick$={ args.onClick$ }
-          text={ args.text }
-          variant={ args.variant }>
-          <div q:slot="icon" style={{ color: "white", fontSize: "24px" }}>
-            <LuRocket/>
-          </div>
-  </Button>;
+export const ButtonWithIcon = {
+  name: 'Button With Icon',
+  render: () => <Button onClick$={onClick$}
+                        text='Primary'
+                        variant='primary'>
+                  <div q:slot="icon" style={{ color: "white", fontSize: "24px" }}>
+                    <LuRocket/>
+                  </div>
+                </Button>,
+};
 
-export const Primary: any = Template.bind({} as ButtonProps);
-Primary.args = {
-  onClick$: onClick$,
-  text: 'Click me!',
-  variant: 'primary'
-} as ButtonProps;
+export const Secondary = {
+  name: 'Secondary',
+  render: () => <Button onClick$={onClick$}
+                        text='Secondary'
+                        variant='secondary' />,
+};
 
-export const Secondary: any = Template.bind({} as ButtonProps);
-Secondary.args = {
-  onClick$: onClick$,
-  text: 'Click me!',
-  variant: 'secondary'
-} as ButtonProps;
+export const Success = {
+  name: 'Success',
+  render: () => <Button onClick$={onClick$}
+                        text='Success'
+                        variant='success' />,
+};
 
-export const Success: any = Template.bind({} as ButtonProps);
-Success.args = {
-  onClick$: onClick$,
-  text: 'Click me!',
-  variant: 'success'
-} as ButtonProps;
+export const Danger = {
+  name: 'Danger',
+  render: () => <Button onClick$={onClick$}
+                        text='Danger'
+                        variant='danger' />,
+};
 
-export const Danger: any = Template.bind({} as ButtonProps);
-Danger.args = {
-  onClick$: onClick$,
-  text: 'Click me!',
-  variant: 'danger'
-} as ButtonProps;
-
-export const Warning: any = Template.bind({} as ButtonProps);
-Warning.args = {
-  onClick$: onClick$,
-  text: 'Click me!',
-  variant: 'warning'
-} as ButtonProps;
-
-
-export const ButtonWithIcon: any = TemplateWithIcon.bind({} as ButtonProps);
-ButtonWithIcon.args = {
-  onClick$: onClick$,
-  text: 'Click me!',
-  variant: 'primary'
-} as ButtonProps;
+export const Warning = {
+  name: 'Warning',
+  render: () => <Button onClick$={onClick$}
+                        text='Warning'
+                        variant='warning' />,
+};
