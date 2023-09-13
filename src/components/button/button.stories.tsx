@@ -1,6 +1,7 @@
-import { Meta } from '@storybook/html';
+import { Meta, Story } from '@storybook/html';
 import { Button, ButtonProps } from './button';
 import { $ } from '@builder.io/qwik';
+import { LuRocket } from '@qwikest/icons/lucide';
 
 export default {
   title: 'Button',
@@ -18,7 +19,7 @@ export default {
     variant: { 
       defaultValue: '',
       control: "select",
-      options: ["primary", "secondary"],
+      options: ['primary', 'secondary', 'success', 'danger', 'warning'],
       description: 'The variation of the button.'
     }
   },
@@ -29,7 +30,17 @@ const onClick$ = $(() => console.log('Button clicked!'));
 const Template = (args: ButtonProps) => 
   <Button onClick$={ args.onClick$ }
           text={ args.text }
-          variant={ args.variant }/>;
+          variant={ args.variant }>
+  </Button>;
+
+const TemplateWithIcon = (args: ButtonProps) => 
+  <Button onClick$={ args.onClick$ }
+          text={ args.text }
+          variant={ args.variant }>
+          <div q:slot="icon" style={{ color: "white", fontSize: "24px" }}>
+            <LuRocket/>
+          </div>
+  </Button>;
 
 export const Primary: any = Template.bind({} as ButtonProps);
 Primary.args = {
@@ -43,4 +54,33 @@ Secondary.args = {
   onClick$: onClick$,
   text: 'Click me!',
   variant: 'secondary'
+} as ButtonProps;
+
+export const Success: any = Template.bind({} as ButtonProps);
+Success.args = {
+  onClick$: onClick$,
+  text: 'Click me!',
+  variant: 'success'
+} as ButtonProps;
+
+export const Danger: any = Template.bind({} as ButtonProps);
+Danger.args = {
+  onClick$: onClick$,
+  text: 'Click me!',
+  variant: 'danger'
+} as ButtonProps;
+
+export const Warning: any = Template.bind({} as ButtonProps);
+Warning.args = {
+  onClick$: onClick$,
+  text: 'Click me!',
+  variant: 'warning'
+} as ButtonProps;
+
+
+export const ButtonWithIcon: any = TemplateWithIcon.bind({} as ButtonProps);
+ButtonWithIcon.args = {
+  onClick$: onClick$,
+  text: 'Click me!',
+  variant: 'primary'
 } as ButtonProps;

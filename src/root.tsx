@@ -3,6 +3,7 @@ import { Button } from "./components/button/button";
 import { Counter } from "./components/counter/counter";
 import { Logo } from "./components/logo/logo";
 import { $ } from '@builder.io/qwik';
+import { LuRocket } from "@qwikest/icons/lucide";
 
 export default () => {
   return (
@@ -14,10 +15,14 @@ export default () => {
       <body>
         <Logo />
         <Counter />
-        <Button onClick$={onClick$}
+        <Button onClick$={ onClick$ }
                 variant={ 'primary' }
-                text="Click me!"/>
-        <Button onClick$={onClick$}
+                text="Click me!">
+                <div q:slot="icon" style={{ color: "white", fontSize: "24px" }}>
+                  <LuRocket/>
+                </div>
+        </Button>
+        <Button onClick$={ onClick$ }
                 variant={ 'secondary' }
                 text="Click me longer text!"/>
       </body>
